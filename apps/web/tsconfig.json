@@ -1,6 +1,7 @@
 {
   "extends": "@ironcoach/tsconfig/nextjs.json",
   "compilerOptions": {
+    "declaration": false,
     "paths": {
       "@/*": ["./src/*"]
     }
