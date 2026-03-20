@@ -9,3 +9,5 @@ dist/
 android/
 ios/
 coverage/
+
+.vercel

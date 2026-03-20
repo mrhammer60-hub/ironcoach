@@ -40,7 +40,12 @@
       "Bash(taskkill //PID 24748 //F)",
       "Bash(node:*)",
       "Bash(grep -oP '.{20}slug.{0,50}' \"C:\\\\Users\\\\mrham\\\\OneDrive\\\\Desktop\\\\IronCoach\\\\apps\\\\api\\\\dist\\\\main.js\")",
-      "Bash(npx tsx:*)"
+      "Bash(npx tsx:*)",
+      "Bash(DATABASE_URL=\"postgresql://postgres:ironcoach123%40@db.jgumffnacuoqujjmcvhl.supabase.co:5432/postgres\" npx prisma migrate deploy)",
+      "Bash(ping -n 1 -w 3000 db.mlxlsghekivxxuhluhdv.supabase.co)",
+      "Bash(DATABASE_URL=\"postgresql://postgres%2Emlxlsghekivxxuhluhdv:BRs0uEuW6n7Ezau0@aws-1-ap-southeast-1.pooler.supabase.com:5432/postgres\" npx prisma migrate deploy)",
+      "Bash(pnpm install:*)",
+      "Bash(grep -A2 \"^  ''''next'''':\\\\|^  next:\" pnpm-lock.yaml)"
     ]
   }
 }
