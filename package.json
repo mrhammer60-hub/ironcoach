@@ -5,7 +5,7 @@
   "packageManager": "pnpm@9.15.4",
   "scripts": {
     "dev": "turbo dev",
-    "build": "cd packages/shared && npx tsc && cd ../../apps/web && next build",
+    "build": "turbo build",
     "build:all": "turbo build",
     "lint": "turbo lint",
     "format": "prettier --write \"**/*.{ts,tsx,js,jsx,json,md}\"",
