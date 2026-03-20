@@ -14,6 +14,9 @@
     "db:migrate": "turbo db:migrate",
     "db:seed": "turbo db:seed"
   },
+  "prisma": {
+    "schema": "packages/db/prisma/schema.prisma"
+  },
   "devDependencies": {
     "prettier": "^3.4.2",
     "turbo": "^2.3.3",
