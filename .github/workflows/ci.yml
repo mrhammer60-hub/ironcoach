@@ -1,0 +1,84 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [main]
+
+jobs:
+  lint-typecheck:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate Prisma client
+        run: cd packages/db && npx prisma generate
+
+      - name: Type check
+        run: pnpm type-check
+
+  test:
+    runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:15-alpine
+        env:
+          POSTGRES_DB: ironcoach_test
+          POSTGRES_USER: ironcoach
+          POSTGRES_PASSWORD: ironcoach
+        ports: ["5432:5432"]
+        options: >-
+          --health-cmd="pg_isready -U ironcoach"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+      redis:
+        image: redis:7-alpine
+        ports: ["6379:6379"]
+        options: >-
+          --health-cmd="redis-cli ping"
+          --health-interval=10s
+          --health-timeout=5s
+          --health-retries=5
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "20"
+
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate Prisma client
+        run: cd packages/db && npx prisma generate
+
+      - name: Run migrations
+        run: cd packages/db && npx prisma migrate deploy
+        env:
+          DATABASE_URL: postgresql://ironcoach:ironcoach@localhost:5432/ironcoach_test
+
+      - name: Run tests
+        run: pnpm test
+        env:
+          DATABASE_URL: postgresql://ironcoach:ironcoach@localhost:5432/ironcoach_test
+          REDIS_URL: redis://localhost:6379
+          JWT_SECRET: ci-test-secret-that-is-at-least-32-characters-long
+          JWT_REFRESH_SECRET: ci-test-refresh-secret-at-least-32-characters
+          NODE_ENV: test

@@ -1,0 +1,27 @@
+{
+  "name": "@ironcoach/mobile",
+  "version": "0.0.0",
+  "private": true,
+  "main": "expo-router/entry",
+  "scripts": {
+    "dev": "expo start",
+    "build": "echo 'Use EAS Build for production builds'",
+    "lint": "echo 'no linter configured'",
+    "type-check": "tsc --noEmit"
+  },
+  "dependencies": {
+    "@ironcoach/shared": "workspace:*",
+    "expo": "~51.0.0",
+    "expo-router": "~3.5.0",
+    "expo-status-bar": "~1.12.1",
+    "react": "18.2.0",
+    "react-native": "0.74.5",
+    "react-native-safe-area-context": "4.10.5",
+    "react-native-screens": "3.31.1"
+  },
+  "devDependencies": {
+    "@ironcoach/tsconfig": "workspace:*",
+    "@types/react": "~18.2.79",
+    "typescript": "^5.7.2"
+  }
+}

@@ -1,0 +1,34 @@
+name: OTA Update
+
+on:
+  push:
+    branches: [main]
+    paths: ['apps/mobile/app/**', 'apps/mobile/lib/**', 'apps/mobile/components/**']
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - uses: pnpm/action-setup@v3
+        with:
+          version: 9
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Setup Expo
+        uses: expo/expo-github-action@v8
+        with:
+          expo-version: latest
+          eas-version: latest
+          token: ${{ secrets.EXPO_TOKEN }}
+
+      - name: Publish OTA update
+        working-directory: apps/mobile
+        run: eas update --branch production --message "${{ github.event.head_commit.message }}"

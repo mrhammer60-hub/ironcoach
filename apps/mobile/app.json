@@ -1,0 +1,11 @@
+{
+  "expo": {
+    "name": "IronCoach",
+    "slug": "ironcoach",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "scheme": "ironcoach",
+    "platforms": ["ios", "android"],
+    "plugins": ["expo-router"]
+  }
+}
