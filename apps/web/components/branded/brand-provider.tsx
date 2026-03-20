@@ -18,7 +18,7 @@ export function BrandProvider({
 }: {
   org: BrandContextType;
   children: React.ReactNode;
-}) {
+}): React.JSX.Element {
   return <BrandContext.Provider value={org}>{children}</BrandContext.Provider>;
 }
 
