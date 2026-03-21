@@ -4,6 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev --port 3000",
+    "prebuild": "pwd && ls && ls packages/ 2>/dev/null || echo 'no packages dir'",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
